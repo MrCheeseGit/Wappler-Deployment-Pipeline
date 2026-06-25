@@ -1,0 +1,30 @@
+# Wappler Deployment Pipeline
+#
+#   docker compose up -d --build
+#   Open http://localhost:8900
+#
+# Mounts your home directory so you can browse to projects and SSH keys in the UI.
+# Optional: copy .env.example to .env to set HOME on Windows or change WDP_PORT.
+
+name: wdp
+
+services:
+  wdp:
+    build: .
+    image: wdp:latest
+    container_name: wdp
+    ports:
+      - "${WDP_PORT:-8900}:8900"
+    volumes:
+      - wdp-data:/data
+      - ${HOME}:${HOME}
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      HOME: ${HOME}
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    restart: unless-stopped
+
+volumes:
+  wdp-data:
+    name: wdp-data

@@ -1,0 +1,37 @@
+# Development environment — runs backend and frontend dev servers separately.
+# For production use, build the Docker image with: docker build -t wdp .
+
+services:
+
+  backend:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "npm install && npm run dev"
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./backend:/app
+      - wdp-data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - PORT=3001
+      - HOST=0.0.0.0
+      - SESSION_DIR=/data/sessions
+      - CONFIG_PATH=/data/wdp-config.json
+      - SESSION_SECRET=${SESSION_SECRET:-dev-only-change-in-production}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  frontend:
+    image: node:20-alpine
+    working_dir: /app
+    command: sh -c "npm install && npm run dev -- --host"
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+    depends_on:
+      - backend
+
+volumes:
+  wdp-data:

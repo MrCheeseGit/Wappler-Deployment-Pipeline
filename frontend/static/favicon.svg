@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Background -->
+  <rect width="32" height="32" rx="7" fill="#0f0f23"/>
+  <!-- Rocket body -->
+  <path d="M16 3 C12 7 10 12 10 17 L16 23 L22 17 C22 12 20 7 16 3Z" fill="#6366f1"/>
+  <!-- Rocket body shine -->
+  <path d="M16 3 C14 7 13 12 13 17 L16 23 L16 3Z" fill="#818cf8" opacity="0.5"/>
+  <!-- Porthole -->
+  <circle cx="16" cy="14" r="2.8" fill="#1e1b4b" stroke="#c7d2fe" stroke-width="1"/>
+  <circle cx="16" cy="14" r="1.5" fill="#a5b4fc" opacity="0.6"/>
+  <!-- Left fin -->
+  <path d="M10 17 L6 23 L11 20Z" fill="#4f46e5"/>
+  <!-- Right fin -->
+  <path d="M22 17 L26 23 L21 20Z" fill="#4f46e5"/>
+  <!-- Exhaust flame outer -->
+  <ellipse cx="16" cy="25" rx="3" ry="4" fill="#f97316" opacity="0.9"/>
+  <!-- Exhaust flame inner -->
+  <ellipse cx="16" cy="25.5" rx="1.5" ry="2.5" fill="#fde68a"/>
+</svg>

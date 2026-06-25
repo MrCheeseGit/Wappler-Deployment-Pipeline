@@ -1,0 +1,116 @@
+Mr Cheese Extension License v1.0
+
+Copyright (c) 2026 Mr Cheese (https://www.mrcheese.co.uk)
+
+1. Definitions
+
+   "Software" means the source code, compiled assets, documentation, install
+   manifests (including wappler-install.json where applicable), examples, and
+   any other files distributed under this license as Mr Cheese software,
+   including Mr Cheese Wappler extensions and the Wappler Deployment Pipeline
+   (WDP).
+
+   "You" means the individual or legal entity exercising permissions granted
+   by this license.
+
+   "Authorized Distribution" means distribution of the Software by Mr Cheese
+   through channels operated or designated by the copyright holder, including
+   but not limited to:
+     - GitHub repositories under the MrCheeseGit organization (or successor)
+     - npm packages published under the mrcheesenpm account (or successor)
+     - Downloads or installers provided at https://www.mrcheese.co.uk
+
+   "Derivative Product" means any work based on the Software that is offered
+   or made available to others as a Wappler extension, deployment tool, npm
+   package, Git repository, marketplace listing, or similar reusable product,
+   whether or not modified.
+
+2. Grant of license
+
+   Permission is hereby granted, free of charge, to any person obtaining a copy
+   of the Software through Authorized Distribution, to:
+
+     (a) use and execute the Software for any purpose, including commercial
+         use, within Your own projects and infrastructure;
+
+     (b) modify the Software for Your own use;
+
+     (c) install and run the Software on systems You control (including
+         Wappler project directories such as extensions/, lib/modules/, and
+         public/, self-hosted WDP installations, and production environments
+         for applications You build or deploy with the Software); and
+
+     (d) make reasonable copies for backup and internal development.
+
+   This grant is personal to You and does not include any right to transfer
+   these permissions to others except as part of a permitted deployment of Your
+   own application or infrastructure that incorporates the Software.
+
+3. Restrictions
+
+   Without prior written permission from the copyright holder
+   (info@mrcheese.co.uk), You may not:
+
+     (a) redistribute, publish, or make available the Software, in whole or in
+         part, to any third party;
+
+     (b) sell, sublicense, lease, or otherwise commercialize the Software or
+         any Derivative Product;
+
+     (c) distribute the Software or a Derivative Product through npm, Git,
+         a marketplace, an installer, or any other channel not controlled by
+         Mr Cheese as Authorized Distribution;
+
+     (d) remove or alter copyright, attribution, or license notices in copies
+         of the Software You are permitted to hold; or
+
+     (e) use the name "Mr Cheese", related logos, or branding in a way that
+         suggests Your Derivative Product is official, endorsed, or
+         maintained by Mr Cheese.
+
+   Nothing in this section prevents You from distributing Your own application
+   (website, API, mobile app, or deployed Wappler project) that merely
+   incorporates installed copies of the Software, provided You do not
+   separately distribute the Software itself as a reusable product.
+
+4. Permission requests
+
+   Requests for redistribution, OEM licensing, white-label use, or other uses
+   not expressly granted above may be submitted in writing to:
+
+     info@mrcheese.co.uk
+
+   The copyright holder may grant or deny such requests at its sole discretion.
+
+5. No trademark license
+
+   This license does not grant any rights to use trademarks, service marks, or
+   trade names of Mr Cheese except as reasonably necessary to describe the
+   origin of unmodified copies obtained through Authorized Distribution.
+
+6. Disclaimer of warranty
+
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT.
+
+7. Limitation of liability
+
+   IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES, OR
+   OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE,
+   ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+   OTHER DEALINGS IN THE SOFTWARE.
+
+8. Termination
+
+   This license terminates automatically if You breach Section 3. Upon
+   termination, You must cease use and delete copies of the Software in Your
+   possession, except that copies embedded in deployed applications may remain
+   in place until You replace them with a lawful alternative.
+
+9. Prior versions
+
+   Releases of Mr Cheese software distributed under the MIT License before
+   adoption of this license remain available under MIT at the version tag
+   under which they were published. This license applies only to versions
+   explicitly distributed with this license text.

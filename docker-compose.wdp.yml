@@ -1,0 +1,25 @@
+# Same as compose.yaml (kept for older references)
+#   docker compose -f docker-compose.wdp.yml up -d --build
+
+name: wdp
+
+services:
+  wdp:
+    build: .
+    image: wdp:latest
+    container_name: wdp
+    ports:
+      - "${WDP_PORT:-8900}:8900"
+    volumes:
+      - wdp-data:/data
+      - ${HOME}:${HOME}
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      HOME: ${HOME}
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    restart: unless-stopped
+
+volumes:
+  wdp-data:
+    name: wdp-data

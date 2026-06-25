@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+
+# SvelteKit build output and cache
+frontend/build/
+frontend/.svelte-kit/
+
+# Environment variables (keep .env.example in the repo for testers)
+.env
+.env.*
+!.env.example
+
+# Session and config data (use Docker volumes, never commit)
+data/
+
+# OS
+.DS_Store
+Thumbs.db
+
+documentation/

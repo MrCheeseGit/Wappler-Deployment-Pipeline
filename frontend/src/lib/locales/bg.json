@@ -1,0 +1,310 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "newDeployment": "New deployment",
+    "signOut": "Sign out"
+  },
+  "auth": {
+    "setup": {
+      "title": "Welcome to WDP",
+      "subtitle": "Create your admin account to get started.",
+      "username": "Username",
+      "password": "Password",
+      "confirm": "Confirm password",
+      "submit": "Create account",
+      "creating": "Creating…",
+      "errorMatch": "Passwords do not match.",
+      "errorShort": "Password must be at least 8 characters."
+    },
+    "login": {
+      "title": "Sign in to WDP",
+      "username": "Username",
+      "password": "Password",
+      "submit": "Sign in",
+      "signing": "Signing in…",
+      "errorInvalid": "Invalid username or password."
+    }
+  },
+  "dashboard": {
+    "title": "Deployment profiles",
+    "newProfile": "New deployment",
+    "noProfiles": "No profiles yet",
+    "noProfilesHint": "Create your first deployment profile to get started.",
+    "manageButton": "Manage →",
+    "editWizard": "Edit wizard",
+    "duplicate": "Duplicate",
+    "rename": "Rename",
+    "renameSave": "Save",
+    "renameCancel": "Cancel",
+    "renameError": "That name is already taken.",
+    "publicBindingWarning": "Security notice: WDP is bound to 0.0.0.0 and is accessible on your network. Use a firewall or VPN to restrict access.",
+    "loading": "Loading profiles…"
+  },
+  "profile": {
+    "tabs": {
+      "deploy": "🚀 Deploy",
+      "history": "📋 History",
+      "terminal": "⌨ Terminal",
+      "git": "🌿 Git",
+      "settings": "⚙ Settings",
+      "knowledge": "🧠 Knowledge"
+    },
+    "header": {
+      "editWizard": "Edit in wizard →",
+      "exportZip": "↓ Export .zip",
+      "deleteProfile": "Delete profile",
+      "deleteConfirm": "Delete profile \"{name}\"?\n\nThis removes it from WDP. Generated files in your project folder are NOT deleted."
+    },
+    "history": {
+      "empty": "No deployments yet.",
+      "rollback": "Rollback",
+      "logs": "Show logs",
+      "duration": "{s}s"
+    },
+    "settings": {
+      "webhookTitle": "CI/CD Webhook",
+      "webhookDesc": "Trigger a deployment from GitHub Actions, GitLab CI, or any system that can make an HTTP request.",
+      "endpoint": "Endpoint",
+      "token": "Token",
+      "generateToken": "Generate webhook token",
+      "regenerateToken": "Regenerate",
+      "generating": "Generating…",
+      "tokenWarning": "⚠ Store this token securely — it is not shown again after regeneration.",
+      "ghActionsExample": "GitHub Actions example"
+    }
+  },
+  "wizard": {
+    "shell": {
+      "title": "Deployment wizard",
+      "back": "← Back",
+      "next": "Next →",
+      "finish": "Generate files"
+    },
+    "step1": {
+      "title": "Step 1 — Point to Project",
+      "subtitle": "Tell the pipeline where your Node.js project lives and which deployment profile to configure.",
+      "projectPath": "Project root path",
+      "projectPathHint": "/home/user/projects/my-app",
+      "projectPathGotcha": "Mount your project directory into the container so this path is accessible.",
+      "browse": "Browse…",
+      "validate": "Validate",
+      "validating": "…",
+      "detected": "✓ Project detected",
+      "name": "Name",
+      "version": "Version",
+      "nodeVersion": "Node.js (engines)",
+      "profileMode": "Deployment profile",
+      "newProfile": "New profile",
+      "existingProfile": "Existing profile",
+      "newProfileName": "Profile name",
+      "selectProfile": "Select a profile"
+    },
+    "step2": {
+      "title": "Step 2 — Target Environment",
+      "subtitle": "Describe the server your app will run on.",
+      "os": "Target OS",
+      "architecture": "CPU architecture"
+    },
+    "step3": {
+      "title": "Step 3 — Database",
+      "subtitle": "Configure your database connection.",
+      "skipDb": "No database (skip this step)",
+      "dbType": "Database type",
+      "dbLocation": "Database location",
+      "managed": "Managed (Docker Compose)",
+      "external": "External / hosted",
+      "host": "Host",
+      "port": "Port",
+      "name": "Database name",
+      "user": "Username",
+      "password": "Password",
+      "sslMode": "SSL mode",
+      "sslCaPath": "CA certificate path",
+      "sslCertPath": "Client certificate path",
+      "sslKeyPath": "Client key path"
+    },
+    "step4": {
+      "title": "Step 4 — Hosting Target",
+      "subtitle": "Where will this app be deployed?",
+      "local": "Local (this machine)",
+      "ssh": "Remote server (SSH)",
+      "railway": "Railway",
+      "sshHost": "SSH host",
+      "sshUser": "SSH user",
+      "sshKeyPath": "SSH key path",
+      "remotePath": "Remote deploy path"
+    },
+    "step5": {
+      "title": "Step 5 — Add-ons",
+      "subtitle": "Select optional services to include in your deployment.",
+      "showPassword": "Покажи паролата",
+      "hidePassword": "Скрий паролата"
+    },
+    "step6": {
+      "title": "Step 6 — Resources & Scaling",
+      "subtitle": "Set container resource limits and replica count.",
+      "replicas": "Replicas",
+      "memLimit": "Memory limit",
+      "cpuLimit": "CPU limit",
+      "healthcheck": "Enable healthcheck"
+    },
+    "step7": {
+      "title": "Step 7 — Security Scanning",
+      "subtitle": "Choose which security scanners to run before each deployment.",
+      "npmAudit": "npm audit",
+      "osvScanner": "OSV Scanner",
+      "socketCli": "Socket Security",
+      "gitleaks": "Gitleaks",
+      "trivy": "Trivy",
+      "grype": "Grype",
+      "dockerScout": "Docker Scout",
+      "blockOnCritical": "Block deployment on critical findings"
+    },
+    "step8": {
+      "title": "Step 8 — Generate Files",
+      "subtitle": "Review and generate your deployment configuration files.",
+      "generate": "Generate files",
+      "regenerate": "Regenerate",
+      "generating": "Generating…",
+      "downloadAll": "Download all",
+      "download": "Download",
+      "copy": "Copy",
+      "copied": "Copied!",
+      "envWarning": "Keep .env.deploy secret. Replace all CHANGE_ME placeholders before deploying.",
+      "notGenerated": "Not yet generated",
+      "notGeneratedHint": "Click \"Generate files\" to produce your deployment configuration.",
+      "gitSection": "Commit & tag generated files"
+    },
+    "step9": {
+      "title": "Step 9 — Deploy",
+      "subtitle": "Run pre-deploy checks and deploy your application."
+    }
+  },
+  "deploy": {
+    "runChecks": "Run checks",
+    "reRunChecks": "Re-run checks",
+    "deploy": "Deploy to {target}",
+    "reDeploy": "Re-deploy",
+    "checks": "Pre-deploy checks",
+    "checksRunning": "Running checks…",
+    "checksPassed": "All checks passed",
+    "checksFailed": "{n} check(s) failed",
+    "logs": "Deployment log",
+    "success": "Deployment succeeded",
+    "failed": "Deployment failed",
+    "healthCheck": "Run health check",
+    "healthOk": "Healthy",
+    "healthFail": "Unhealthy",
+    "cleanup": "Docker cleanup",
+    "cleanupDangling": "Remove dangling images only",
+    "cleanupAll": "Remove all unused resources",
+    "runCleanup": "Run cleanup"
+  },
+  "git": {
+    "branch": "Branch",
+    "commit": "Commit",
+    "dirty": "Uncommitted changes",
+    "clean": "Clean",
+    "notARepo": "Not a git repository",
+    "initTitle": "Initialise Git for this deployment",
+    "initBody": "Creates a git repository in your Wappler project folder, adds WDP-safe .gitignore rules (secrets stay local), and optionally commits generated wdp/ files. Further git features in WDP are coming later.",
+    "initButton": "Initialise Git",
+    "initBusy": "Initialising…",
+    "initFirstCommit": "Create first commit for wdp/ files (if any exist)",
+    "initCommitPlaceholder": "chore(wdp): initialise {profile} deployment files",
+    "initSuccess": "Git is ready for this project.",
+    "initDoneRepo": "Git repository created (branch main)",
+    "initDoneGitignore": ".gitignore updated with WDP rules",
+    "initDoneCommit": "First commit created ({hash})",
+    "initAlreadyRepo": "Project was already a git repository — .gitignore refreshed",
+    "initRemoteHint": "Further commits, diffs, and GitHub push will come in a later WDP release.",
+    "repoActiveTitle": "Git repository detected",
+    "repoActiveBody": "This project already has git. WDP Phase A only covers initial setup.",
+    "comingSoonNote": "Coming later in WDP: diff, commit wdp/ files, deploy tags, and GitHub integration.",
+    "refresh": "↻ Refresh",
+    "showDiff": "Show diff",
+    "hideDiff": "Hide diff",
+    "commitMessage": "Commit message",
+    "commitButton": "Commit",
+    "committing": "Committing…",
+    "tagButton": "Create deploy tag",
+    "tagging": "Tagging…",
+    "tagSuccess": "Tag created",
+    "loadingStatus": "Loading git status…"
+  },
+  "knowledge": {
+    "title": "Project Knowledge",
+    "subtitle": "Generate a knowledge base from your project source files for use with the AI assistant.",
+    "generate": "Generate knowledge",
+    "update": "Update knowledge",
+    "generating": "Generating…",
+    "lastGenerated": "Last generated",
+    "files": "Source files scanned",
+    "tokens": "Estimated tokens",
+    "viewKnowledge": "View knowledge.md",
+    "viewJson": "View knowledge.json",
+    "notGenerated": "No knowledge base yet",
+    "notGeneratedHint": "Click \"Generate knowledge\" to analyse your project.",
+    "additionalDirs": "Additional directories",
+    "addDir": "Add directory",
+    "removeDir": "Remove",
+    "streamTitle": "Generation log"
+  },
+  "ai": {
+    "title": "AI Assistant",
+    "placeholder": "Ask anything about your deployment…",
+    "send": "Send",
+    "sending": "…",
+    "clearChat": "Clear chat",
+    "noKey": "No OpenRouter API key set. Add one in Settings.",
+    "goToSettings": "Go to Settings",
+    "modelLabel": "Model",
+    "contextNote": "Context: {profile} knowledge base + WDP skills",
+    "errorTitle": "AI error",
+    "thinking": "Thinking…"
+  },
+  "settings": {
+    "title": "Settings",
+    "aiSection": "AI Assistant",
+    "openrouterKey": "OpenRouter API key",
+    "openrouterKeyHint": "Get a key at openrouter.ai — it is stored on the server and never sent to the browser.",
+    "keyPlaceholder": "sk-or-…",
+    "saveKey": "Save key",
+    "savingKey": "Saving…",
+    "keySaved": "Saved",
+    "keyCleared": "Key cleared",
+    "clearKey": "Clear key",
+    "model": "Default model",
+    "saveModel": "Save",
+    "modelSaved": "Saved"
+  },
+  "staleGenerate": {
+    "title": "Регенерирайте файловете за внедряване",
+    "bodyChanged": "Настройките в съветника са променени след последното генериране на Docker файлове (стъпка 8). Регенерирайте Dockerfile.deploy, docker-compose.deploy.yml и .env.deploy преди внедряване.",
+    "bodyNever": "Все още не сте генерирали файловете за внедряване. Завършете стъпка 8 преди първото внедряване.",
+    "bodyMissing": "Генерираните файлове липсват в папката на проекта. Отворете стъпка 8 и ги регенерирайте.",
+    "cta": "Към стъпка 8 — Регенериране"
+  },
+  "languageSelector": {
+    "label": "Language",
+    "en": "English",
+    "pt": "Português",
+    "es": "Español",
+    "de": "Deutsch",
+    "nl": "Nederlands",
+    "bg": "Български"
+  },
+  "common": {
+    "loading": "Loading…",
+    "error": "Error",
+    "save": "Save",
+    "cancel": "Cancel",
+    "close": "Close",
+    "confirm": "Confirm",
+    "delete": "Delete",
+    "back": "Back",
+    "next": "Next",
+    "or": "or",
+    "notAvailable": "—"
+  }
+}

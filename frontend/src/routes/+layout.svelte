@@ -45,7 +45,9 @@
     <p class="text-gray-500 text-sm tracking-widest uppercase">Loading…</p>
   </div>
 {:else}
-  <slot />
+  <div class="relative z-0">
+    <slot />
+  </div>
   {#if $authStatus?.isAuthenticated}
     {@const activeProfile = $page.params.profile || ''}
     <AiPanel profile={activeProfile} />

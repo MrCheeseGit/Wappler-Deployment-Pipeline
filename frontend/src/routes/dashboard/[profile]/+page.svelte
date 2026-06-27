@@ -5,6 +5,7 @@
   import { api } from '$lib/api.js';
   import { wizardStore } from '$lib/wizardStore.js';
   import { mergeProfileIntoWizard } from '$lib/profileWizardSync.js';
+  import { hardNavigate } from '$lib/navigate.js';
   import DeployPanel from '$lib/components/DeployPanel.svelte';
   import Terminal from '$lib/Terminal.svelte';
   import GitPanel from '$lib/components/GitPanel.svelte';
@@ -204,7 +205,7 @@
       wizardStore.setProfile(profileName);
       wizardStore.setStep(1, { profileMode: 'existing', selectedProfile: profileName });
     }
-    goto('/wizard/step1');
+    hardNavigate('/wizard/step1');
   }
 
   function fmtDate(iso) {

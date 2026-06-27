@@ -143,22 +143,31 @@
   }
 </script>
 
-<!-- Floating button — hidden while panel is open -->
+<!-- Floating button — top-right; z-20 sits below modals, above page chrome -->
 {#if !open}
-  <button
-    type="button"
-    onclick={() => { open = true; loadSettings(); }}
-    class="fixed bottom-12 left-6 z-50 w-12 h-12 rounded-full bg-indigo-600 hover:bg-indigo-500
-           text-white shadow-2xl flex items-center justify-center text-xl transition
-           border border-indigo-400/30"
-    title="AI Assistant"
-  >🤖</button>
+  <div class="fixed top-[4.5rem] right-4 z-20 pointer-events-none">
+    <button
+      type="button"
+      onclick={() => { open = true; loadSettings(); }}
+      class="pointer-events-auto w-11 h-11 rounded-full bg-indigo-600 hover:bg-indigo-500
+             text-white shadow-2xl flex items-center justify-center text-lg transition
+             border border-indigo-400/30"
+      title="AI Assistant"
+    >🤖</button>
+  </div>
 {/if}
 
 <!-- Slide-over panel -->
 {#if open}
+  <!-- Backdrop — click outside to close; keeps panel from silently blocking the page -->
+  <button
+    type="button"
+    class="fixed inset-0 z-40 bg-black/40 cursor-default"
+    aria-label="Close AI assistant"
+    onclick={() => { open = false; }}
+  ></button>
   <div
-    class="fixed inset-y-0 right-0 z-40 w-full max-w-md bg-gray-900 border-l border-gray-700
+    class="fixed inset-y-0 right-0 z-50 w-full max-w-md bg-gray-900 border-l border-gray-700
            flex flex-col shadow-2xl"
   >
     <!-- Header -->

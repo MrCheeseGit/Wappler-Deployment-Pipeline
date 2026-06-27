@@ -1,9 +1,9 @@
 <script>
   import { onMount } from 'svelte';
   import { get } from 'svelte/store';
-  import { goto } from '$app/navigation';
   import { wizardStore } from '$lib/wizardStore.js';
   import { mergeProfileIntoWizard, applyMergedWizardConfig } from '$lib/profileWizardSync.js';
+  import { hardNavigate } from '$lib/navigate.js';
   import { api } from '$lib/api.js';
   import { _ } from 'svelte-i18n';
 
@@ -40,7 +40,7 @@
   function newProfile() {
     wizardStore.reset();
     open = false;
-    goto('/wizard/step1');
+    hardNavigate('/wizard/step1');
   }
 </script>
 

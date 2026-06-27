@@ -1,6 +1,8 @@
 <script>
+  import { onMount } from 'svelte';
   import { get } from 'svelte/store';
-  import { goto } from '$app/navigation';
+  import { page } from '$app/stores';
+  import { hardNavigate } from '$lib/navigate.js';
   import { wizardStore } from '$lib/wizardStore.js';
   import { stepValid } from '$lib/stepValid.js';
   import { api } from '$lib/api.js';
@@ -72,26 +74,41 @@
     return n <= $wizardStore.maxReachedStep;
   }
 
+  onMount(() => {
+    const m = $page.url.pathname.match(/\/wizard\/step(\d+)/);
+    if (m) {
+      const n = Number(m[1]);
+      if (n >= 1 && n <= 9) {
+        wizardStore.update((s) => ({
+          ...s,
+          currentStep: n,
+          maxReachedStep: Math.max(s.maxReachedStep, n),
+        }));
+      }
+    }
+  });
+
   function jumpTo(n) {
     if (!canJumpTo(n)) return;
     wizardStore.update(s => ({ ...s, currentStep: n }));
-    goto(`/wizard/step${n}`);
+    void persistWizard();
+    hardNavigate(`/wizard/step${n}`);
   }
 
-  async function handleBack() {
+  function handleBack() {
     if (isFirstStep) return;
-    await persistWizard();
     const prev = $wizardStore.currentStep - 1;
     wizardStore.update(s => ({ ...s, currentStep: prev }));
-    goto(`/wizard/step${prev}`);
+    void persistWizard();
+    hardNavigate(`/wizard/step${prev}`);
   }
 
-  async function handleNext() {
+  function handleNext() {
     if (!$stepValid) return;
-    await persistWizard();
     const cur = $wizardStore.currentStep;
     wizardStore.completeStep(cur);
-    goto(`/wizard/step${cur + 1}`);
+    void persistWizard();
+    hardNavigate(`/wizard/step${cur + 1}`);
   }
 </script>
 
@@ -165,19 +182,23 @@
     </div>
   </main>
 
-  <!-- Footer navigation -->
-  <footer class="border-t border-gray-800 px-4 pt-4 pb-12 shrink-0">
+  <!-- Footer navigation — extra left/bottom padding keeps controls clear of fixed chrome -->
+  <footer class="border-t border-gray-800 px-4 pt-4 pb-16 pl-20 shrink-0 relative z-20">
     <div class="max-w-3xl mx-auto flex items-center justify-between">
-      <button
-        type="button"
-        onclick={handleBack}
-        disabled={isFirstStep}
-        class="px-4 py-2 text-sm text-gray-400 hover:text-white border border-gray-700
-               hover:border-gray-600 rounded-lg transition disabled:opacity-30
-               disabled:cursor-not-allowed"
-      >
-        {$_('wizard.shell.back')}
-      </button>
+      {#if isFirstStep}
+        <span class="px-4 py-2 text-sm text-gray-600 border border-transparent rounded-lg opacity-30">
+          {$_('wizard.shell.back')}
+        </span>
+      {:else}
+        <a
+          href="/wizard/step{$wizardStore.currentStep - 1}"
+          onclick={(e) => { e.preventDefault(); handleBack(); }}
+          class="px-4 py-2 text-sm text-gray-400 hover:text-white border border-gray-700
+                 hover:border-gray-600 rounded-lg transition"
+        >
+          {$_('wizard.shell.back')}
+        </a>
+      {/if}
 
       {#if !isLastStep}
         <button

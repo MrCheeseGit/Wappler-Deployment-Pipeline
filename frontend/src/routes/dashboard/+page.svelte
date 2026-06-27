@@ -5,6 +5,7 @@
   import { authStatus } from '$lib/stores.js';
   import { wizardStore } from '$lib/wizardStore.js';
   import { mergeProfileIntoWizard } from '$lib/profileWizardSync.js';
+  import { hardNavigate, profilePath } from '$lib/navigate.js';
   import LanguageSelector from '$lib/components/LanguageSelector.svelte';
   import AboutModal from '$lib/components/AboutModal.svelte';
   import WdpUpdateBanner from '$lib/components/WdpUpdateBanner.svelte';
@@ -74,14 +75,10 @@
 
   function startNewDeployment() {
     wizardStore.reset();
-    goto('/wizard/step1');
+    hardNavigate('/wizard/step1');
   }
 
-  function manageProfile(name) {
-    goto(`/dashboard/${encodeURIComponent(name)}`);
-  }
-
-  function editProfile(name) {
+  function prepareEditWizard(name) {
     const saved = profileData[name];
     if (saved?.wizardConfig) {
       wizardStore.set(mergeProfileIntoWizard(saved, name) || { ...saved.wizardConfig, activeProfile: name });
@@ -90,8 +87,19 @@
       wizardStore.setProfile(name);
       wizardStore.setStep(1, { profileMode: 'existing', selectedProfile: name });
     }
-    goto('/wizard/step1');
   }
+
+  function openManage(name) {
+    hardNavigate(profilePath(name));
+  }
+
+  function openEditWizard(name) {
+    prepareEditWizard(name);
+    hardNavigate('/wizard/step1');
+  }
+
+  const actionBtn =
+    'text-sm px-2 py-1.5 -my-1 rounded-md transition cursor-pointer bg-transparent border-0';
 
   async function duplicateProfile(name) {
     const newName = prompt(`Duplicate "${name}" — enter a name for the copy:`);
@@ -307,8 +315,8 @@
     class="hidden"
   />
 
-  <!-- pr/pb clearance: fixed AI assistant (bottom-right) must not cover profile action buttons -->
-  <main class="flex-1 max-w-5xl mx-auto w-full px-4 py-10 pr-16 pb-20">
+  <!-- Extra bottom padding: fixed app footer -->
+  <main class="flex-1 max-w-5xl mx-auto w-full px-4 py-10 pb-16">
 
     <div class="mb-4">
       <WdpUpdateBanner variant="compact" />
@@ -403,10 +411,6 @@
         </button>
       </div>
     {:else}
-      <div class="mb-6">
-        <DeployActivityHeatmap />
-      </div>
-
       <div class="flex flex-col sm:flex-row sm:items-center gap-3 mb-4">
         <div class="flex-1 min-w-0">
           <label for="profile-search" class="sr-only">{$_('dashboard.searchPlaceholder')}</label>
@@ -453,7 +457,7 @@
       {:else}
       <div class="space-y-3">
         {#each visibleProfiles as profile (profile)}
-          <div class="border border-gray-700 rounded-xl bg-gray-800/30 hover:bg-gray-800/50 transition overflow-hidden">
+          <article class="relative border border-gray-700 rounded-xl bg-gray-800/30 hover:bg-gray-800/50 transition isolate">
 
             {#if renamingProfile === profile}
               <!-- Inline rename row -->
@@ -493,8 +497,8 @@
               {@const summary = deploySummary[profile] || {}}
               {@const badge = targetBadge(summary.hostingTarget || profileData[profile]?.hostingTarget || '')}
               {@const last = summary.lastDeploy}
-              <div class="grid grid-cols-1 sm:grid-cols-[minmax(0,1fr)_auto] gap-x-4 gap-y-3 items-start px-5 py-4">
-                <div class="min-w-0 overflow-hidden">
+              <div class="px-5 pt-4 pb-3">
+                <div class="min-w-0 overflow-hidden pointer-events-none select-text">
                   <div class="flex items-center gap-2 flex-wrap">
                     <p class="text-white font-medium text-sm">{profile}</p>
                     {#if badge.labelKey || badge.rawLabel}
@@ -538,48 +542,54 @@
                       href={last.deployUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="block text-xs text-indigo-400 hover:text-indigo-300 mt-1 truncate"
+                      class="pointer-events-auto block text-xs text-indigo-400 hover:text-indigo-300 mt-1 truncate max-w-full"
                       title={last.deployUrl}
                     >{$_('dashboard.openApp')} → {last.deployUrl}</a>
                   {/if}
                 </div>
-                <div class="flex flex-wrap items-center gap-x-3 gap-y-1 sm:justify-end relative z-10">
-                  <button
-                    type="button"
-                    onclick={() => manageProfile(profile)}
-                    class="text-sm text-indigo-400 hover:text-indigo-300 transition"
-                  >
-                    {$_('dashboard.manageButton')}
-                  </button>
-                  <button
-                    type="button"
-                    onclick={() => editProfile(profile)}
-                    class="text-sm text-gray-500 hover:text-gray-300 transition"
-                  >
-                    {$_('dashboard.editWizard')}
-                  </button>
-                  <button
-                    type="button"
-                    onclick={() => duplicateProfile(profile)}
-                    disabled={duplicateBusy === profile}
-                    class="text-sm text-gray-500 hover:text-gray-300 transition
-                           disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {duplicateBusy === profile ? $_('dashboard.copying') : $_('dashboard.duplicate')}
-                  </button>
-                  <button
-                    type="button"
-                    onclick={() => startRename(profile)}
-                    class="text-sm text-gray-500 hover:text-gray-300 transition"
-                  >
-                    {$_('dashboard.rename')}
-                  </button>
-                </div>
+              </div>
+              <div
+                class="flex flex-wrap items-center gap-x-1 gap-y-1 px-5 py-2.5 border-t border-gray-700/60 bg-gray-900/30"
+                role="toolbar"
+              >
+                <button
+                  type="button"
+                  class="{actionBtn} text-indigo-400 hover:text-indigo-300 hover:bg-indigo-950/40"
+                  onclick={() => openManage(profile)}
+                >
+                  {$_('dashboard.manageButton')}
+                </button>
+                <button
+                  type="button"
+                  class="{actionBtn} text-gray-400 hover:text-gray-200 hover:bg-gray-700/50"
+                  onclick={() => openEditWizard(profile)}
+                >
+                  {$_('dashboard.editWizard')}
+                </button>
+                <button
+                  type="button"
+                  class="{actionBtn} text-gray-400 hover:text-gray-200 hover:bg-gray-700/50 disabled:opacity-50 disabled:cursor-not-allowed"
+                  onclick={() => duplicateProfile(profile)}
+                  disabled={duplicateBusy === profile}
+                >
+                  {duplicateBusy === profile ? $_('dashboard.copying') : $_('dashboard.duplicate')}
+                </button>
+                <button
+                  type="button"
+                  class="{actionBtn} text-gray-400 hover:text-gray-200 hover:bg-gray-700/50"
+                  onclick={() => startRename(profile)}
+                >
+                  {$_('dashboard.rename')}
+                </button>
               </div>
             {/if}
 
-          </div>
+          </article>
         {/each}
+      </div>
+
+      <div class="mt-8 overflow-hidden pointer-events-none">
+        <DeployActivityHeatmap interactive={false} />
       </div>
       {/if}
     {/if}

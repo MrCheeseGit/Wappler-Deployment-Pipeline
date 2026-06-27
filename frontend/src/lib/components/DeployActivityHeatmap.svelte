@@ -7,6 +7,8 @@
   export let profile = '';
   /** Smaller cells and tighter layout for embedded use. */
   export let compact = false;
+  /** Fleet dashboard: cells are visual only (avoids hundreds of buttons intercepting clicks). */
+  export let interactive = true;
 
   let activity = null;
   let loading = true;
@@ -118,7 +120,7 @@
 </script>
 
 <section
-  class="rounded-xl border border-gray-700/80 bg-gray-800/25 {compact ? 'p-3' : 'p-5'}"
+  class="rounded-xl border border-gray-700/80 bg-gray-800/25 overflow-hidden {compact ? 'p-3' : 'p-5'}"
   aria-label={titleKey}
 >
   <div class="flex flex-wrap items-baseline justify-between gap-2 {compact ? 'mb-2' : 'mb-4'}">
@@ -169,12 +171,21 @@
           </div>
           {#each weeks as week, wi (`${row}-${week.weekStart}`)}
             {@const day = week.days[row]}
-            <button
-              type="button"
-              class="{cellClasses(day)} min-w-0 transition hover:ring-1 hover:ring-indigo-300/50 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-              title={tooltipText(day, activeLocale)}
-              aria-label={tooltipText(day, activeLocale)}
-            ></button>
+            {@const cellClass = cellClasses(day)}
+            {#if interactive}
+              <button
+                type="button"
+                class="{cellClass} min-w-0 transition hover:ring-1 hover:ring-indigo-300/50 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                title={tooltipText(day, activeLocale)}
+                aria-label={tooltipText(day, activeLocale)}
+              ></button>
+            {:else}
+              <div
+                class="{cellClass} min-w-0 pointer-events-none"
+                title={tooltipText(day, activeLocale)}
+                aria-hidden="true"
+              ></div>
+            {/if}
           {/each}
         {/each}
       </div>
